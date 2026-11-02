@@ -1,56 +1,50 @@
-# Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  title:        "K-Means Clustering AI/ML Accelerator"
+  author:       "Niyaz"
+  description:  "Pipelined hardware engine computing Euclidean distance clustering"
+  language:     "Verilog"
+  clock_hz:     50000000       # 50 MHz
 
-  # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  # Our design has ~2,500 gates, so 1x2 tiles (167x216 um) provides ideal routing density
+  tiles: "1x2"
 
-  # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_example"
+  top_module:  "tt_um_niyajuban_kmeans"
 
-  # List your project's source files here.
-  # Source files must be in ./src and you must list each source file separately, one per line.
-  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "project.v"
+    - "pe.sv"
+    - "dist_unit.sv"
+    - "kmeans_top.sv"
 
-# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
-# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
-  # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  # Inputs: Point X coordinate
+  ui[0]: "px[0]"
+  ui[1]: "px[1]"
+  ui[2]: "px[2]"
+  ui[3]: "px[3]"
+  ui[4]: "px[4]"
+  ui[5]: "px[5]"
+  ui[6]: "px[6]"
+  ui[7]: "px[7]"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "cluster_out (0=C0, 1=C1)"
+  uo[1]: "valid_out"
+  uo[2]: "dist0_lsb[0]"
+  uo[3]: "dist0_lsb[1]"
+  uo[4]: "dist0_lsb[2]"
+  uo[5]: "dist0_lsb[3]"
+  uo[6]: "dist0_lsb[4]"
+  uo[7]: "dist0_lsb[5]"
 
-  # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  # Inputs: Point Y coordinate
+  uio[0]: "py[0]"
+  uio[1]: "py[1]"
+  uio[2]: "py[2]"
+  uio[3]: "py[3]"
+  uio[4]: "py[4]"
+  uio[5]: "py[5]"
+  uio[6]: "py[6]"
+  uio[7]: "py[7]"
 
-# Do not change!
 yaml_version: 6
