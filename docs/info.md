@@ -1,20 +1,6 @@
-<!---
-
-This file is used to generate your project datasheet. Please fill in the information below and delete any unused
-sections.
-
-You can also include images in this folder and reference them in the markdown. Each image must be less than
-512 kb in size, and the combined size of all images must be less than 1 MB.
--->
-
 ## How it works
-
-Explain how your project works
+This chip is a custom hardware accelerator for the K-Means clustering algorithm.
+It evaluates distances to two cluster centroids concurrently using pipelined subtract-square-accumulate units, then uses a comparator to output the closest cluster ID.
 
 ## How to test
-
-Explain how to use your project
-
-## External hardware
-
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+Apply a clock and release reset. Feed coordinate Px on `ui_in` and Py on `uio_in`. After a 4-cycle pipeline latency, `uo_out[0]` indicates the cluster assignment (0 or 1).
