@@ -1,0 +1,9 @@
+read_verilog -sv pe.sv dist_unit.sv kmeans_top.sv
+hierarchy -check -top kmeans_top
+proc
+opt
+techmap
+opt
+stat
+write_verilog kmeans_synth_netlist.v
+show -format dot -prefix kmeans_schematic kmeans_top
